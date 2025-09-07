@@ -220,7 +220,7 @@ void* threadPool::managerFunc(void* arg)
 
         const int number=2;
         // 添加线程
-        if(liveThreadNum<=(pool->maxThreadNum-2)&&taskNum>liveThreadNum)
+        if(liveThreadNum<=(pool->maxThreadNum-2)&&taskNum>liveThreadNum-busyThreadNum)
         {
             // 加锁
             pthread_mutex_lock(&pool->threadPoolMutex);

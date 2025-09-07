@@ -261,13 +261,13 @@ void* threadpool_manager(void* arg)
 
         // 添加线程
         // 管理者线程判断是否需要创建线程
-        if (liveNum<pool->maxThreadNum && queueSize>liveNum)
+        if (liveNum<pool->maxThreadNum && queueSize>liveNum-busyNum)
         {
             // 加锁
             pthread_mutex_lock(&pool->poolMutex);
             int count=0;
             // 创建线程
-            for (int i = 0; i < pool->maxThreadNum  && pool->liveThreadNum<pool->maxThreadNum && queueSize>liveNum && count<NUM; i++)
+            for (int i = 0; i < pool->maxThreadNum  && pool->liveThreadNum<pool->maxThreadNum &&  queueSize>liveNum-busyNum && count<NUM; i++)
             {
                 if(pool->threadIDs[liveNum]==0)
                 {
