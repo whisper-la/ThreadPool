@@ -21,7 +21,7 @@ void taskQueue::addTask(task_t task)
 void taskQueue::addTask(callback function,void* arg)
 {
     pthread_mutex_lock(&taskQueueMutex);
-    m_taskQueue.push(task_t(function,arg));
+    m_taskQueue.push(task_t<T>(function,arg));
     pthread_mutex_unlock(&taskQueueMutex);
 }
 
